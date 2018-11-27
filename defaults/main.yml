@@ -15,4 +15,4 @@
 # limitations under the License.
 
 # URL for download minikube binary.
-minikube_url: "minikube https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64"
+minikube_url: "https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64"
