@@ -52,7 +52,7 @@
       changed_when: docker_version_result.rc != 0
 
     - name: minikube start
-      command: su -l -s /bin/bash -c 'minikube start --vm-driver=none'
+      command: su -l -s /bin/bash -c 'minikube start --vm-driver=none --kubernetes-version=v1.12.3'
       args:
         warn: false
       register: mimikube_start_result
