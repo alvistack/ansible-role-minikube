@@ -63,6 +63,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
+    - { dest: "/etc/bash_completion.d", mode: "0755", state: "directory" }
     - { dest: "/root/.kube", mode: "0700", state: "directory" }
     - { dest: "/root/.minikube", mode: "0700", state: "directory" }
   tags: minikube
@@ -88,6 +89,15 @@
     - { dest: "/root/.kube/config", mode: "0600" }
   tags: minikube
 
+- name: install minikube bash completion
+  shell: |
+    minikube completion bash > /etc/bash_completion.d/minikube.sh
+  args:
+    creates: "/etc/bash_completion.d/minikube.sh"
+  register: bash_completion_result
+  changed_when: bash_completion_result.rc != 0
+  tags: minikube
+
 - name: prepare files
   file:
     dest: "{{ item.dest }}"
@@ -96,6 +106,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
+    - { dest: "/etc/bash_completion.d/minikube.sh", mode: "0755" }
     - { dest: "/root/.kube/config", mode: "0600" }
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube

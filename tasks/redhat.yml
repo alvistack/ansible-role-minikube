@@ -14,5 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# URL for download minikube binary.
-minikube_url: "https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64"
+- name: yum install
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ _yum }}"
+  tags: minikube

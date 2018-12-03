@@ -34,30 +34,23 @@
 - hosts: all
   remote_user: root
   tasks:
+    - name: kubectl version
+      command: kubectl version --client
+      register: kubectl_version_result
+      changed_when: kubectl_version_result.rc != 0
+
+    - name: start service
+      service:
+        name: docker
+        state: started
+
     - name: docker version
       command: docker version
       register: docker_version_result
       changed_when: docker_version_result.rc != 0
 
-    - name: kubectl version
-      command: kubectl version
-      register: kubectl_version_result
-      changed_when: kubectl_version_result.rc != 0
-    
-    - name: minikube version
-      command: minikube version --client
-      register: minikube_version_result
-      changed_when: minikube_version_result.rc != 0
-    
-    - name: start service
-      command: service docker start
-      args:
-        warn: false
-      register: service_start_result
-      changed_when: service_start_result.rc != 0
-
     - name: minikube start
-      command: su -l -s /bin/bash -c 'minikube start --vm-driver=none'
+      command: su -l -s /bin/bash -c 'minikube start --vm-driver=none --apiserver-name=minikube --kubernetes-version=v1.12.3 --extra-config=kubelet.cgroup-driver=systemd'
       args:
         warn: false
       register: mimikube_start_result
@@ -73,3 +66,13 @@
       until: kubectl_get_pod_result.rc == 0
       retries: 300
       delay: 1
+
+    - name: kubectl version
+      command: kubectl version
+      register: kubectl_version_result
+      changed_when: kubectl_version_result.rc != 0
+
+    - name: minikube version
+      command: minikube version
+      register: minikube_version_result
+      changed_when: minikube_version_result.rc != 0
