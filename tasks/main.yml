@@ -24,7 +24,7 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "../vars"
-      skip: "yes"
+      skip: true
   loop_control:
     loop_var: "loop_var"
   tags: minikube
@@ -39,63 +39,31 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "."
-      skip: "yes"
+      skip: true
   loop_control:
     loop_var: "loop_var"
   tags: minikube
 
-- name: copy templates
-  template:
-    src: "./templates{{ item.dest }}.j2"
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-  with_items:
-    - { dest: "/etc/profile.d/minikube.sh" }
-  tags: minikube
-
-- name: prepare files
+- name: prepare directories
   file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-    state: "{{ item.state | default('file') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
   with_items:
-    - { dest: "/etc/bash_completion.d", mode: "0755", state: "directory" }
-    - { dest: "/root/.kube", mode: "0700", state: "directory" }
-    - { dest: "/root/.minikube", mode: "0700", state: "directory" }
+    - { dest: "/usr/local/bin" }
   tags: minikube
 
 - name: download archive
   get_url:
-    url: "{{ minikube_url }}"
-    dest: "/usr/local/bin/minikube"
-    owner: "root"
-    group: "root"
-    mode: "0755"
-  tags: minikube
-
-- name: touch files
-  copy:
+    url: "{{ item.url }}"
     dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-    content: ""
-    force: "no"
+    checksum: "{{ item.checksum }}"
   with_items:
-    - { dest: "/root/.kube/config", mode: "0600" }
-  tags: minikube
-
-- name: install minikube bash completion
-  shell: |
-    minikube completion bash > /etc/bash_completion.d/minikube.sh
-  args:
-    creates: "/etc/bash_completion.d/minikube.sh"
-  register: bash_completion_result
-  changed_when: bash_completion_result.rc != 0
+    - "{{ minikube_download }}"
+  register: result
+  until: result is succeeded
   tags: minikube
 
 - name: prepare files
@@ -106,7 +74,5 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
-    - { dest: "/etc/bash_completion.d/minikube.sh", mode: "0755" }
-    - { dest: "/root/.kube/config", mode: "0600" }
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube

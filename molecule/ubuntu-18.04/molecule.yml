@@ -14,14 +14,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: bootstrap
-  src: https://github.com/alvistack/ansible-role-bootstrap
-  version: develop
-
-- name: docker
-  src: https://github.com/alvistack/ansible-role-docker
-  version: develop
-
-- name: kubectl
-  src: https://github.com/alvistack/ansible-role-kubectl
-  version: develop
+scenario:
+  name: ubuntu-18.04
+driver:
+  name: lxd
+platforms:
+  - name: ${MOLECULE_INSTANCE_NAME}-1
+    url: unix:/var/snap/lxd/common/lxd/unix.socket
+    source:
+      server: https://images.linuxcontainers.org
+      protocol: simplestreams
+      alias: ubuntu/bionic/amd64
+lint:
+  name: yamllint
+dependency:
+  name: galaxy
+  options:
+    role-file: ansible-role-requirements.yml
+    roles-path: ${ANSIBLE_ROLES_PATH}
+    ignore-errors: true
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

@@ -14,14 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: bootstrap
-  src: https://github.com/alvistack/ansible-role-bootstrap
-  version: develop
-
-- name: docker
-  src: https://github.com/alvistack/ansible-role-docker
-  version: develop
-
-- name: kubectl
-  src: https://github.com/alvistack/ansible-role-kubectl
-  version: develop
+_zypper: [
+  { state: "latest", name: "conntrack-tools" },
+  { state: "latest", name: "ebtables" },
+  { state: "latest", name: "ethtool" },
+  { state: "latest", name: "iproute" },
+  { state: "latest", name: "iptables" },
+  { state: "latest", name: "socat" },
+  { state: "latest", name: "util-linux" },
+]

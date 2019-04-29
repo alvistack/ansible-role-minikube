@@ -14,14 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: bootstrap
-  src: https://github.com/alvistack/ansible-role-bootstrap
-  version: develop
-
-- name: docker
-  src: https://github.com/alvistack/ansible-role-docker
-  version: develop
-
-- name: kubectl
-  src: https://github.com/alvistack/ansible-role-kubectl
-  version: develop
+- name: zypper install
+  zypper:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ _zypper }}"
+  register: result
+  until: result is succeeded
+  tags: minikube

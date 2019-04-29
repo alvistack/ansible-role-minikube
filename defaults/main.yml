@@ -14,5 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Kubernetes version.
+kubernetes_version: "v1.14.1"
+
 # URL for download minikube binary.
-minikube_url: "https://storage.googleapis.com/minikube/releases/v0.30.0/minikube-linux-amd64"
+minikube_version: "v1.0.0"
+minikube_download:
+  url: "https://storage.googleapis.com/minikube/releases/{{ minikube_version }}/minikube-linux-amd64"
+  dest: "/usr/local/bin/minikube"
+  checksum: "sha1:75d0c3e77adef244e639ec88ba16136a23509763"

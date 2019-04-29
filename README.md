@@ -11,7 +11,7 @@ Ansible Role for minikube Installation.
 
 This role require Ansible 2.6 or higher.
 
-This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7.
+This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 15.
 
 ## Role Variables
 
@@ -23,7 +23,7 @@ This role was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7.
 
 ## Example Playbook
 
-[tests/test.yml](tests/test.yml)
+[molecule/default/playbook.yml](molecule/default/playbook.yml)
 
 ## License
 
