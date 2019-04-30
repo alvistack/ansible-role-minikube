@@ -20,6 +20,7 @@
   roles:
     - role: bootstrap
     - role: docker
+    - role: cni-plugins
     - role: kubectl
       kubectl_version: "{{ kubernetes_version }}"
     - role: minikube
@@ -60,7 +61,9 @@
         minikube start \
           --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
           --extra-config=kubelet.cgroup-driver=systemd \
+          --extra-config=kubelet.network-plugin=cni \
           --kubernetes-version={{ kubernetes_version }} \
+          --network-plugin=cni \
           --vm-driver=none
       args:
         executable: "/bin/bash"
@@ -68,6 +71,16 @@
       until: result is succeeded
       changed_when: result is not succeeded
       ignore_errors: true
+
+    - name: install pod network add-on (weave)
+      shell: |
+        set -o pipefail
+        kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+      args:
+        executable: "/bin/bash"
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
 
     - name: kubectl version
       command: kubectl version

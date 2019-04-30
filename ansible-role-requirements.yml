@@ -22,6 +22,10 @@
   src: https://github.com/alvistack/ansible-role-docker
   version: develop
 
+- name: cni-plugins
+  src: https://github.com/alvistack/ansible-role-cni-plugins
+  version: develop
+
 - name: kubectl
   src: https://github.com/alvistack/ansible-role-kubectl
   version: develop
