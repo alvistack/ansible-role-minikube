@@ -14,20 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: python
-  src: https://github.com/alvistack/ansible-role-python
-  version: develop
-
-- name: apt
-  src: https://github.com/alvistack/ansible-role-apt
-  version: develop
-
-- name: yum
-  src: https://github.com/alvistack/ansible-role-yum
+- name: bootstrap
+  src: https://github.com/alvistack/ansible-role-bootstrap
   version: develop
 
 - name: docker
   src: https://github.com/alvistack/ansible-role-docker
+  version: develop
+
+- name: cni-plugins
+  src: https://github.com/alvistack/ansible-role-cni-plugins
   version: develop
 
 - name: kubectl

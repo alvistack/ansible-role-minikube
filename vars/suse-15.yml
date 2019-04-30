@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: yum install
-  yum:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
-  with_items: "{{ _yum }}"
-  register: result
-  until: result is succeeded
-  tags: minikube
+_zypper: [
+  { state: "latest", name: "conntrack-tools" },
+  { state: "latest", name: "ebtables" },
+  { state: "latest", name: "ethtool" },
+  { state: "latest", name: "iproute" },
+  { state: "latest", name: "iptables" },
+  { state: "latest", name: "socat" },
+  { state: "latest", name: "util-linux" },
+]
