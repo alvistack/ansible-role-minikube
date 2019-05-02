@@ -49,6 +49,12 @@
         state: "link"
         force: true
 
+    - name: patch /.dockerenv
+      copy:
+        dest: "/.dockerenv"
+        content: ""
+        force: false
+
     - name: start service
       service:
         name: docker
