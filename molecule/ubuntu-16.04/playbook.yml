@@ -20,7 +20,7 @@
   roles:
     - role: bootstrap
     - role: docker
-    - role: cni-plugins
+    - role: kubernetes-cni
     - role: kubectl
       kubectl_version: "{{ kubernetes_version }}"
     - role: minikube
