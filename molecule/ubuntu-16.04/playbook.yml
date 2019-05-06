@@ -20,9 +20,9 @@
   roles:
     - role: bootstrap
     - role: docker
+    - role: kubernetes-cni
     - role: kubectl
       kubectl_version: "{{ kubernetes_version }}"
-    - role: kubernetes-cni
     - role: minikube
 
 - hosts: all
