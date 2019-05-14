@@ -23,3 +23,5 @@ _yum: [
   { state: "latest", name: "socat" },
   { state: "latest", name: "util-linux" },
 ]
+
+_kubelet_resolv_conf: "/etc/resolv.conf"

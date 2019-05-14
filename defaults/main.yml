@@ -17,6 +17,10 @@
 # Kubernetes version.
 kubernetes_version: "v1.14.1"
 
+# ResolverConfig is the resolver configuration file used as the basis
+# for the container DNS resolution configuration.
+kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
+
 # URL for download minikube binary.
 minikube_version: "v1.0.0"
 minikube_download:
