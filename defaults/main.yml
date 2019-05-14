@@ -22,8 +22,8 @@ kubernetes_version: "v1.14.1"
 kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
 
 # URL for download minikube binary.
-minikube_version: "v1.0.0"
+minikube_version: "v1.0.1"
 minikube_download:
   url: "https://storage.googleapis.com/minikube/releases/{{ minikube_version }}/minikube-linux-amd64"
   dest: "/usr/local/bin/minikube"
-  checksum: "sha1:75d0c3e77adef244e639ec88ba16136a23509763"
+  checksum: "sha1:9472db94a9faf1bcbd2bfe16b1a99afa56790f50"
