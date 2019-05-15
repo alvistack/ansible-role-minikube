@@ -76,3 +76,32 @@
   with_items:
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube
+
+- name: start services
+  service:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { state: "started", name: "docker" }
+  changed_when: false
+  ignore_errors: true
+  tags: minikube
+
+- name: minikube start
+  shell: |
+    set -o pipefail
+    minikube start \
+      --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
+      --extra-config=kubelet.cgroup-driver=systemd \
+      --extra-config=kubelet.network-plugin=cni \
+      --extra-config=kubelet.resolv.conf={{ kubelet_resolv_conf }} \
+      --kubernetes-version={{ kubernetes_version }} \
+      --network-plugin=cni \
+      --vm-driver=none
+  args:
+    executable: "/bin/bash"
+  register: result
+  until: result is succeeded
+  changed_when: result is not succeeded
+  ignore_errors: true
+  tags: minikube
