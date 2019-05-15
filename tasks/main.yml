@@ -94,7 +94,7 @@
       --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
       --extra-config=kubelet.cgroup-driver=systemd \
       --extra-config=kubelet.network-plugin=cni \
-      --extra-config=kubelet.resolv.conf={{ kubelet_resolv_conf }} \
+      --extra-config=kubelet.resolv-conf={{ kubelet_resolv_conf }} \
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
       --vm-driver=none
