@@ -23,12 +23,14 @@
     - role: docker
     - role: kubernetes-cni
     - role: kubectl
-    - role: minikube
 
-- hosts: all
+- hosts: kube-master
   become: true
   remote_user: root
-  tasks:
+  roles:
+    - role: minikube
+
+  post_tasks:
     - name: install pod network add-on (flannel)
       shell: |
         set -o pipefail
