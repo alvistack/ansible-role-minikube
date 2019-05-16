@@ -91,9 +91,12 @@
   shell: |
     set -o pipefail
     minikube start \
+      --extra-config=controller-manager.allocate-node-cidrs=true \
+      --extra-config=controller-manager.cluster-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
       --extra-config=kubelet.cgroup-driver={{ kubelet_cgroup_driver }} \
       --extra-config=kubelet.network-plugin=cni \
+      --extra-config=kubelet.pod-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubelet.resolv-conf={{ kubelet_resolv_conf }} \
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
