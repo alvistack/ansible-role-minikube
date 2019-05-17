@@ -53,6 +53,9 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   with_items:
+    - { dest: "/etc/kubernetes" }
+    - { dest: "/etc/kubernetes/addons" }
+    - { dest: "/etc/kubernetes/manifests" }
     - { dest: "/usr/local/bin" }
   tags: minikube
 
