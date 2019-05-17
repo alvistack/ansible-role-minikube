@@ -56,7 +56,19 @@
     - { dest: "/etc/kubernetes" }
     - { dest: "/etc/kubernetes/addons" }
     - { dest: "/etc/kubernetes/manifests" }
+    - { dest: "/root/.minikube/config" }
     - { dest: "/usr/local/bin" }
+  tags: minikube
+
+- name: copy templates
+  template:
+    src: "./templates{{ item.dest }}.j2"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items:
+    - { dest: "/root/.minikube/config/config.json" }
   tags: minikube
 
 - name: download archive
@@ -78,6 +90,7 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
+    - { dest: "/root/.minikube/config/config.json" }
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube
 

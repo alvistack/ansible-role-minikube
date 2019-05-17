@@ -27,6 +27,12 @@ kubelet_cgroup_driver: "systemd"
 # for the container DNS resolution configuration.
 kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
 
+# Config modifies minikube config files using subcommands.
+minikube_config:
+  addon-manager: false
+  default-storageclass: false
+  storage-provisioner: false
+
 # URL for download minikube binary.
 minikube_version: "v1.0.1"
 minikube_download:
