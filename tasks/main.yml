@@ -23,10 +23,11 @@
         - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
+        - "main.yml"
       paths: "../vars"
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: minikube
 
 - name: include release specific tasks
@@ -39,9 +40,9 @@
         - "{{ ansible_distribution | lower }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       paths: "."
-      skip: true
   loop_control:
     loop_var: "loop_var"
+  ignore_errors: true
   tags: minikube
 
 - name: prepare directories
@@ -52,7 +53,22 @@
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.state | default('directory') }}"
   with_items:
+    - { dest: "/etc/kubernetes" }
+    - { dest: "/etc/kubernetes/addons" }
+    - { dest: "/etc/kubernetes/manifests" }
+    - { dest: "/root/.minikube/config" }
     - { dest: "/usr/local/bin" }
+  tags: minikube
+
+- name: copy templates
+  template:
+    src: "./templates{{ item.dest }}.j2"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  with_items:
+    - { dest: "/root/.minikube/config/config.json" }
   tags: minikube
 
 - name: download archive
@@ -74,5 +90,38 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   with_items:
+    - { dest: "/root/.minikube/config/config.json" }
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
+  tags: minikube
+
+- name: start services
+  service:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { state: "started", name: "docker" }
+  changed_when: false
+  ignore_errors: true
+  tags: minikube
+
+- name: minikube start
+  shell: |
+    set -o pipefail
+    minikube start \
+      --extra-config=controller-manager.allocate-node-cidrs=true \
+      --extra-config=controller-manager.cluster-cidr={{ kubernetes_pod_subnet }} \
+      --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
+      --extra-config=kubelet.cgroup-driver={{ kubelet_cgroup_driver }} \
+      --extra-config=kubelet.network-plugin=cni \
+      --extra-config=kubelet.pod-cidr={{ kubernetes_pod_subnet }} \
+      --extra-config=kubelet.resolv-conf={{ kubelet_resolv_conf }} \
+      --kubernetes-version={{ kubernetes_version }} \
+      --network-plugin=cni \
+      --vm-driver=none
+  args:
+    executable: "/bin/bash"
+  register: result
+  until: result is succeeded
+  changed_when: result is not succeeded
+  ignore_errors: true
   tags: minikube

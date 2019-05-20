@@ -25,6 +25,9 @@ platforms:
       server: https://images.linuxcontainers.org
       protocol: simplestreams
       alias: ubuntu/bionic/amd64
+    groups:
+      - kube-master
+      - kube-node
 lint:
   name: yamllint
 dependency:

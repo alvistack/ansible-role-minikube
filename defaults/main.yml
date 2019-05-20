@@ -17,9 +17,21 @@
 # Kubernetes version.
 kubernetes_version: "v1.14.1"
 
+# PodSubnet is the subnet used by pods.
+kubernetes_pod_subnet: "10.233.64.0/18"
+
+# driver that the kubelet uses to manipulate cgroups on the host (cgroupfs or systemd)
+kubelet_cgroup_driver: "systemd"
+
 # ResolverConfig is the resolver configuration file used as the basis
 # for the container DNS resolution configuration.
 kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
+
+# Config modifies minikube config files using subcommands.
+minikube_config:
+  addon-manager: false
+  default-storageclass: false
+  storage-provisioner: false
 
 # URL for download minikube binary.
 minikube_version: "v1.0.1"
