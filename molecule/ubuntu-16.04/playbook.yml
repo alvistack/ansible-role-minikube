@@ -15,8 +15,8 @@
 # limitations under the License.
 
 - hosts: all
-  become: true
   remote_user: root
+  become: true
   roles:
     - role: bootstrap
     - role: python
@@ -25,8 +25,8 @@
     - role: kubectl
 
 - hosts: kube-master
-  become: true
   remote_user: root
+  become: true
   roles:
     - role: minikube
 
@@ -39,7 +39,7 @@
         kubectl apply -f /tmp/kube-flannel.yml
       args:
         executable: "/bin/bash"
-      when: inventory_hostname == ansible_play_hosts[0]
+      when: ansible_hostname == ansible_play_hosts[0]
       register: result
       until: result is succeeded
       changed_when: result is not succeeded
