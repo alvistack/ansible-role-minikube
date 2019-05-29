@@ -13,3 +13,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+_minikube_download:
+  v1.1.0:
+    url: "https://storage.googleapis.com/minikube/releases/v1.1.0/minikube-linux-amd64"
+    dest: "/usr/local/bin/minikube"
+    checksum: "sha1:15c5ce46c86dd9245cbc0e803347f9b27e18b74f"
+  v1.0.1:
+    url: "https://storage.googleapis.com/minikube/releases/v1.0.1/minikube-linux-amd64"
+    dest: "/usr/local/bin/minikube"
+    checksum: "sha1:9472db94a9faf1bcbd2bfe16b1a99afa56790f50"
+  v1.0.0:
+    url: "https://storage.googleapis.com/minikube/releases/v1.0.0/minikube-linux-amd64"
+    dest: "/usr/local/bin/minikube"
+    checksum: "sha1:75d0c3e77adef244e639ec88ba16136a23509763"

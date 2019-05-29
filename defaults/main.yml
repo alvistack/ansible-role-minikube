@@ -15,7 +15,13 @@
 # limitations under the License.
 
 # Kubernetes version.
-kubernetes_version: "v1.14.1"
+kubernetes_version: "v1.14.2"
+
+# minikube version.
+minikube_version: "v1.1.0"
+
+# minikube download details.
+minikube_download: "{{ _minikube_download[minikube_version] }}"
 
 # PodSubnet is the subnet used by pods.
 kubernetes_pod_subnet: "10.233.64.0/18"
@@ -32,10 +38,3 @@ minikube_config:
   addon-manager: false
   default-storageclass: false
   storage-provisioner: false
-
-# URL for download minikube binary.
-minikube_version: "v1.0.1"
-minikube_download:
-  url: "https://storage.googleapis.com/minikube/releases/{{ minikube_version }}/minikube-linux-amd64"
-  dest: "/usr/local/bin/minikube"
-  checksum: "sha1:9472db94a9faf1bcbd2bfe16b1a99afa56790f50"
