@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _minikube_download:
+  v1.2.0:
+    url: "https://storage.googleapis.com/minikube/releases/v1.2.0/minikube-linux-amd64"
+    dest: "/usr/local/bin/minikube"
+    checksum: "sha1:e6334b3a750054e25a80d95c1244247cc8a99475"
   v1.1.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.1.1/minikube-linux-amd64"
     dest: "/usr/local/bin/minikube"
