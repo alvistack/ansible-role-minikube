@@ -17,21 +17,21 @@
 _minikube_download:
   v1.2.0:
     url: "https://storage.googleapis.com/minikube/releases/v1.2.0/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.2.0"
     checksum: "sha1:e6334b3a750054e25a80d95c1244247cc8a99475"
   v1.1.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.1.1/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.1.1"
     checksum: "sha1:3213301f07d3e7c64d4ef804ded07123b600c924"
   v1.1.0:
     url: "https://storage.googleapis.com/minikube/releases/v1.1.0/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.1.0"
     checksum: "sha1:15c5ce46c86dd9245cbc0e803347f9b27e18b74f"
   v1.0.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.0.1/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.0.1"
     checksum: "sha1:9472db94a9faf1bcbd2bfe16b1a99afa56790f50"
   v1.0.0:
     url: "https://storage.googleapis.com/minikube/releases/v1.0.0/minikube-linux-amd64"
-    dest: "/usr/local/bin/minikube"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.0.0"
     checksum: "sha1:75d0c3e77adef244e639ec88ba16136a23509763"
