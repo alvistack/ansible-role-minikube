@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Kubernetes version.
-kubernetes_version: "v1.15.0"
+kubernetes_version: "v1.15.1"
 
 # minikube version.
 minikube_version: "v1.2.0"
