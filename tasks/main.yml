@@ -128,9 +128,11 @@
       --extra-config=controller-manager.cluster-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
       --extra-config=kubelet.cgroup-driver={{ kubelet_cgroup_driver }} \
+      --extra-config=kubelet.kubelet-cgroups={{ kubelet_kubelet_cgroups }} \
       --extra-config=kubelet.network-plugin=cni \
       --extra-config=kubelet.pod-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubelet.resolv-conf={{ kubelet_resolv_conf }} \
+      --extra-config=kubelet.runtime-cgroups={{ kubelet_runtime_cgroups }} \
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
       --vm-driver=none

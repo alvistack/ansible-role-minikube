@@ -29,6 +29,12 @@ kubernetes_pod_subnet: "10.233.64.0/18"
 # driver that the kubelet uses to manipulate cgroups on the host (cgroupfs or systemd)
 kubelet_cgroup_driver: "systemd"
 
+# Optional absolute name of cgroups to create and run the runtime in.
+kubelet_runtime_cgroups: "/systemd/system.slice"
+
+# Optional absolute name of cgroups to create and run the Kubelet in.
+kubelet_kubelet_cgroups: "/systemd/system.slice"
+
 # ResolverConfig is the resolver configuration file used as the basis
 # for the container DNS resolution configuration.
 kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
