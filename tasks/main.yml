@@ -124,6 +124,7 @@
   shell: |
     set -o pipefail
     minikube start \
+      --apiserver-port={{ kube_apiserver_bind_port }} \
       --extra-config=controller-manager.allocate-node-cidrs=true \
       --extra-config=controller-manager.cluster-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
