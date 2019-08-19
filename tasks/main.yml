@@ -64,6 +64,27 @@
     - { dest: "{{ minikube_download.dest | dirname }}" }
   tags: minikube
 
+- name: download archive
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    checksum: "{{ item.checksum }}"
+  loop:
+    - "{{ minikube_download }}"
+  register: get_url_result
+  until: get_url_result is succeeded
+  tags: minikube
+
+- name: unarchive package
+  shell: |
+    set -o pipefail
+    cd /usr/local/bin
+    TMP_DIR="`mktemp -d`" && cp {{ minikube_download.dest }} $TMP_DIR/minikube && mv $TMP_DIR/minikube . && rm -rf $TMP_DIR
+  args:
+    executable: "/bin/bash"
+  when: get_url_result is changed
+  tags: minikube
+
 - name: copy templates
   template:
     dest: "{{ item.dest }}"
@@ -73,29 +94,6 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/root/.minikube/config/config.json" }
-  tags: minikube
-
-- name: download archive
-  get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-    checksum: "{{ item.checksum }}"
-  loop:
-    - "{{ minikube_download }}"
-  register: result
-  until: result is succeeded
-  tags: minikube
-
-- name: copy archive
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-    remote_src: true
-  loop:
-    - { src: "{{ minikube_download.dest }}", dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube
 
 - name: prepare files
