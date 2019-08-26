@@ -1,11 +1,18 @@
 # Ansible Role for minikube
 
-## 3.3.0 - TBC
+## 3.4.0 - TBC
 
 ### Major Changes
 
+## 3.3.0 - 2019-08-27
+
+### Major Changes
+
+  - Update for RHEL 7
+  - Add Vagrant test for RHEL 7
   - Download archives to `/var/cache/ansible`
   - Upgrade packages if archives not found from `/var/cache/ansible`
+  - Debug `--apiserver-port` conflict with dashboard
 
 ## 3.2.0 - 2019-07-08
 
