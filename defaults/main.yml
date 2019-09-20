@@ -18,7 +18,7 @@
 kubernetes_version: "v1.15.4"
 
 # minikube version.
-minikube_version: "v1.3.1"
+minikube_version: "v1.4.0"
 
 # minikube download details.
 minikube_download: "{{ _minikube_download[minikube_version] }}"
