@@ -1,0 +1,50 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- hosts: all
+  remote_user: root
+  become: true
+  roles:
+    - role: bootstrap
+    - role: python
+    - role: docker
+    - role: kubernetes-cni
+    - role: kubectl
+
+- hosts: kube-master
+  remote_user: root
+  become: true
+  roles:
+    - role: minikube
+
+  post_tasks:
+    - name: install pod network add-on (flannel)
+      shell: |
+        set -o pipefail
+        curl -skL https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml > /tmp/kube-flannel.yml
+        sed -i 's/{{ "10.244.0.0/16" | regex_escape() }}/{{ kubernetes_pod_subnet | regex_escape() }}/g' /tmp/kube-flannel.yml
+        kubectl apply -f /tmp/kube-flannel.yml
+      args:
+        executable: "/bin/bash"
+      when: ansible_hostname == ansible_play_hosts[0]
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+
+    - name: kubectl version
+      command: kubectl version
+      register: result
+      changed_when: result is not succeeded
