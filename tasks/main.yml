@@ -119,6 +119,8 @@
   tags: minikube
 
 - name: minikube start
+  environment:
+    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   shell: |
     set -o pipefail
     minikube start \
