@@ -15,10 +15,10 @@
 # limitations under the License.
 
 # Kubernetes version.
-kubernetes_version: "v1.16.3"
+kubernetes_version: "v1.17.0"
 
 # minikube version.
-minikube_version: "v1.5.2"
+minikube_version: "v1.6.0-beta.1"
 
 # minikube download details.
 minikube_download: "{{ _minikube_download[minikube_version] }}"
