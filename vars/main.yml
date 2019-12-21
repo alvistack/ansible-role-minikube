@@ -15,6 +15,10 @@
 # limitations under the License.
 
 _minikube_download:
+  v1.6.2:
+    url: "https://storage.googleapis.com/minikube/releases/v1.6.2/minikube-linux-amd64"
+    dest: "/var/cache/ansible/minikube-linux-amd64-v1.6.2"
+    checksum: "sha1:81946e0b63b93c497eefb88aa1ab8b26c4a13b56"
   v1.6.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.6.1/minikube-linux-amd64"
     dest: "/var/cache/ansible/minikube-linux-amd64-v1.6.1"
