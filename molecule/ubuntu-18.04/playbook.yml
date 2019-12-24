@@ -23,7 +23,6 @@
     - role: docker
     - role: kubernetes-cni
     - role: kubectl
-      kubectl_version: "{{ kubernetes_version }}"
 
 - hosts: kube-master
   remote_user: root
