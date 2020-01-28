@@ -82,6 +82,8 @@
     cd /usr/local/bin
     TMP_DIR="`mktemp -d`" \
       && cp {{ minikube_download.dest }} $TMP_DIR/minikube \
+      && chown root:root $TMP_DIR/minikube \
+      && chmod 0755 $TMP_DIR/minikube \
       && mv $TMP_DIR/minikube . \
       && rm -rf $TMP_DIR
   args:
