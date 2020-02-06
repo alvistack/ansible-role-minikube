@@ -23,3 +23,5 @@ _apt:
   - { state: "latest", name: "mount" }
   - { state: "latest", name: "socat" }
   - { state: "latest", name: "util-linux" }
+
+_kubelet_resolv_conf: "/run/resolvconf/resolv.conf"
