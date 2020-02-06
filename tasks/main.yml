@@ -144,6 +144,11 @@
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
       --vm-driver=none
+    CM_KUBE_PROXY_YAML="/var/tmp/minikube/cm-kube-proxy.yaml" \
+      && kubectl get configmap/kube-proxy -n kube-system -o yaml > $CM_KUBE_PROXY_YAML \
+      && sed -i 's/maxPerCore:.*/maxPerCore: 0/g' $CM_KUBE_PROXY_YAML \
+      && sed -i 's/masqueradeAll:.*/masqueradeAll: true/g' $CM_KUBE_PROXY_YAML \
+      && kubectl replace -Rf $CM_KUBE_PROXY_YAML
   args:
     executable: "/bin/bash"
   register: result
