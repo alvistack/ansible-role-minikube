@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Migrate molecule tests to Libvirt
   - Bugfix `coredns` with `_kubelet_resolv_conf`
   - Bugfix `kube-proxy` with `--conntrack-max-per-core = 0`
   - Bugfix `kube-proxy` with `--masquerade-all`

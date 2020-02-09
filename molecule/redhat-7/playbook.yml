@@ -31,7 +31,7 @@
     - role: minikube
       kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
     - role: kubernetes-addon-manager
-    - role: kubernetes-weave
+    - role: kubernetes-flannel
 
   post_tasks:
     - name: kubectl version

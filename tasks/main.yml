@@ -61,10 +61,13 @@
     - { dest: "/etc/kubernetes/manifests" }
     - { dest: "/root/.minikube/config" }
     - { dest: "/usr/local/bin" }
+    - { dest: "/usr/share/ca-certificates" }
     - { dest: "{{ minikube_download.dest | dirname }}" }
   tags: minikube
 
 - name: download archive
+  vars:
+    ansible_python_interpreter: "python3"
   get_url:
     url: "{{ item.url }}"
     dest: "{{ item.dest }}"
