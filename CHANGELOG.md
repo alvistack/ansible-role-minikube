@@ -6,8 +6,6 @@
 
   - Migrate molecule tests to Libvirt
   - Bugfix `coredns` with `_kubelet_resolv_conf`
-  - Bugfix `kube-proxy` with `--conntrack-max-per-core = 0`
-  - Bugfix `kube-proxy` with `--masquerade-all`
   - Disable all addons with `minikube start --install-addons=false`
   - Disable addon `default-storageclass` manually
   - Disable addon `storage-provisioner` manually
