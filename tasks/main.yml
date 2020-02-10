@@ -134,12 +134,19 @@
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
       --vm-driver=none
-    minikube addons disable default-storageclass
-    minikube addons disable storage-provisioner
   args:
     executable: "/bin/bash"
   register: result
   until: result is succeeded
   changed_when: result is not succeeded
+  ignore_errors: true
+  tags: minikube
+
+- name: minikube addones
+  command: minikube addons {{ (item.status == 'present') | ternary('enable', 'disable') }} {{ item.name }}
+  loop:
+    - { state: "absent", name: "default-storageclass" }
+    - { state: "absent", name: "storage-provisioner" }
+  changed_when: false
   ignore_errors: true
   tags: minikube
