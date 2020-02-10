@@ -59,7 +59,6 @@
     - { dest: "/etc/kubernetes" }
     - { dest: "/etc/kubernetes/addons" }
     - { dest: "/etc/kubernetes/manifests" }
-    - { dest: "/root/.minikube/config" }
     - { dest: "/usr/local/bin" }
     - { dest: "/usr/share/ca-certificates" }
     - { dest: "{{ minikube_download.dest | dirname }}" }
@@ -94,17 +93,6 @@
   when: get_url_result is changed
   tags: minikube
 
-- name: copy templates
-  template:
-    dest: "{{ item.dest }}"
-    src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-    owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
-    mode: "{{ item.mode | default('0644') }}"
-  loop:
-    - { dest: "/root/.minikube/config/config.json" }
-  tags: minikube
-
 - name: prepare files
   file:
     dest: "{{ item.dest }}"
@@ -113,7 +101,6 @@
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
-    - { dest: "/root/.minikube/config/config.json" }
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube
 
@@ -143,9 +130,12 @@
       --extra-config=kubelet.node-ip={{ kubelet_node_ip }} \
       --extra-config=kubelet.resolv-conf={{ kubelet_resolv_conf }} \
       --extra-config=kubelet.runtime-cgroups={{ kubelet_runtime_cgroups }} \
+      --install-addons=false \
       --kubernetes-version={{ kubernetes_version }} \
       --network-plugin=cni \
       --vm-driver=none
+    minikube addons disable default-storageclass
+    minikube addons disable storage-provisioner
     CM_KUBE_PROXY_YAML="/var/tmp/minikube/cm-kube-proxy.yaml" \
       && kubectl get configmap/kube-proxy -n kube-system -o yaml > $CM_KUBE_PROXY_YAML \
       && sed -i 's/maxPerCore:.*/maxPerCore: 0/g' $CM_KUBE_PROXY_YAML \

@@ -44,9 +44,3 @@ kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
 
 # BindPort sets the secure port for the API Server to bind to.
 kube_apiserver_bind_port: "6443"
-
-# Config modifies minikube config files using subcommands.
-minikube_config:
-  addon-manager: false
-  default-storageclass: false
-  storage-provisioner: false
