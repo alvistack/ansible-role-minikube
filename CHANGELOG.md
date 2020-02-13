@@ -1,11 +1,18 @@
 # Ansible Role for minikube
 
-## 4.2.0 - TBC
+## 4.3.0 - TBC
 
 ### Major Changes
 
-  - Migrate molecule tests to Libvirt
+## 4.2.0 - 2020-02-13
+
+### Major Changes
+
+  - Migrate molecule driver to Libvirt
+  - Migrate molecule verifier to Ansible
+  - Support Ubuntu 19.10
   - Bugfix `coredns` with `_kubelet_resolv_conf`
+  - Bugfix `podSubnet` with `--extra-config=kubeadm.pod-network-cidr`
   - Disable all addons with `minikube start --install-addons=false`
   - Disable addon `default-storageclass` manually
   - Disable addon `storage-provisioner` manually
