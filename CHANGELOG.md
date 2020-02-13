@@ -4,7 +4,8 @@
 
 ### Major Changes
 
-  - Migrate molecule tests to Libvirt
+  - Migrate molecule driver to Libvirt
+  - Migrate molecule verifier to Ansible
   - Bugfix `coredns` with `_kubelet_resolv_conf`
   - Disable all addons with `minikube start --install-addons=false`
   - Disable addon `default-storageclass` manually
