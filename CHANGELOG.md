@@ -6,6 +6,7 @@
 
   - Migrate molecule driver to Libvirt
   - Migrate molecule verifier to Ansible
+  - Support Ubuntu 19.10
   - Bugfix `coredns` with `_kubelet_resolv_conf`
   - Disable all addons with `minikube start --install-addons=false`
   - Disable addon `default-storageclass` manually
