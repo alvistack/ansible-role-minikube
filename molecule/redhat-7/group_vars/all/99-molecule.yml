@@ -15,4 +15,5 @@
 # limitations under the License.
 
 kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
+
 flannel_iface: "eth1"
