@@ -104,20 +104,11 @@
     - { dest: "/usr/local/bin/minikube", mode: "0755" }
   tags: minikube
 
-- name: enable services
-  service:
-    name: "{{ item.name }}"
-    enabled: true
-  loop:
-    - { name: "docker" }
-  changed_when: false
-  ignore_errors: true
-  tags: minikube
-
 - name: start services
   service:
     name: "{{ item.name }}"
     state: "started"
+    enabled: true
   loop:
     - { name: "docker" }
   changed_when: false
