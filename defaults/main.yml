@@ -38,6 +38,12 @@ kubelet_runtime_cgroups: "/systemd/system.slice"
 # Optional absolute name of cgroups to create and run the Kubelet in.
 kubelet_kubelet_cgroups: "/systemd/system.slice"
 
+# The container runtime to use.
+kubelet_container_runtime: "docker"
+
+# The endpoint of remote runtime service.
+kubelet_container_runtime_endpoint: "unix:///var/run/dockershim.sock"
+
 # ResolverConfig is the resolver configuration file used as the basis
 # for the container DNS resolution configuration.
 kubelet_resolv_conf: "{{ _kubelet_resolv_conf }}"
