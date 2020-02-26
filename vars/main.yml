@@ -15,27 +15,31 @@
 # limitations under the License.
 
 _minikube_download:
+  v1.7.3:
+    url: "https://storage.googleapis.com/minikube/releases/v1.7.3/minikube-linux-amd64"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.3"
+    checksum: "sha1:0af85ec59576c9bd55237eec83af5e830a096184"
   v1.7.2:
     url: "https://storage.googleapis.com/minikube/releases/v1.7.2/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.7.2"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.2"
     checksum: "sha1:c1e67ea056f3e0807a77546a965839d8438b6b95"
   v1.7.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.7.1/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.7.1"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.1"
     checksum: "sha1:ddc5e7e51ae74b7d3b17192898190c47f0046513"
   v1.7.0:
     url: "https://storage.googleapis.com/minikube/releases/v1.7.0/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.7.0"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.0"
     checksum: "sha1:01025a824fc6187ad995232a65e06caa9397b70b"
   v1.6.2:
     url: "https://storage.googleapis.com/minikube/releases/v1.6.2/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.6.2"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.6.2"
     checksum: "sha1:81946e0b63b93c497eefb88aa1ab8b26c4a13b56"
   v1.6.1:
     url: "https://storage.googleapis.com/minikube/releases/v1.6.1/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.6.1"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.6.1"
     checksum: "sha1:3d899d3f55b585a07f9ec6f620344dbe6678636c"
   v1.6.0:
     url: "https://storage.googleapis.com/minikube/releases/v1.6.0/minikube-linux-amd64"
-    dest: "/var/cache/ansible/minikube-linux-amd64-v1.6.0"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.6.0"
     checksum: "sha1:7f5f143e7ce4c44f3109e4d574db667dacfd4aa0"

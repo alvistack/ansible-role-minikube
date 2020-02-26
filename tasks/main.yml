@@ -82,7 +82,7 @@
   shell: |
     set -o pipefail
     cd /usr/local/bin
-    TMP_DIR="`mktemp -d`" \
+    TMP_DIR="$(mktemp -d)" \
       && cp {{ minikube_download.dest }} $TMP_DIR/minikube \
       && chown root:root $TMP_DIR/minikube \
       && chmod 0755 $TMP_DIR/minikube \
@@ -107,9 +107,10 @@
 - name: start services
   service:
     name: "{{ item.name }}"
-    state: "{{ item.state }}"
+    state: "started"
+    enabled: true
   loop:
-    - { state: "started", name: "docker" }
+    - { name: "docker" }
   changed_when: false
   ignore_errors: true
   tags: minikube
@@ -125,6 +126,8 @@
       --extra-config=kubeadm.ignore-preflight-errors=FileContent--proc-sys-net-bridge-bridge-nf-call-iptables,SystemVerification \
       --extra-config=kubeadm.pod-network-cidr={{ kubernetes_pod_subnet }} \
       --extra-config=kubelet.cgroup-driver={{ kubelet_cgroup_driver }} \
+      --extra-config=kubelet.container-runtime-endpoint={{ kubelet_container_runtime_endpoint }} \
+      --extra-config=kubelet.container-runtime={{ kubelet_container_runtime }} \
       --extra-config=kubelet.kubelet-cgroups={{ kubelet_kubelet_cgroups }} \
       --extra-config=kubelet.network-plugin=cni \
       --extra-config=kubelet.node-ip={{ kubelet_node_ip }} \

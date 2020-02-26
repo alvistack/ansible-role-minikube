@@ -18,7 +18,7 @@
 kubernetes_version: "v1.17.3"
 
 # minikube version.
-minikube_version: "v1.7.2"
+minikube_version: "v1.7.3"
 
 # minikube download details.
 minikube_download: "{{ _minikube_download[minikube_version] }}"
@@ -37,6 +37,12 @@ kubelet_runtime_cgroups: "/systemd/system.slice"
 
 # Optional absolute name of cgroups to create and run the Kubelet in.
 kubelet_kubelet_cgroups: "/systemd/system.slice"
+
+# The container runtime to use.
+kubelet_container_runtime: "docker"
+
+# The endpoint of remote runtime service.
+kubelet_container_runtime_endpoint: "/var/run/dockershim.sock"
 
 # ResolverConfig is the resolver configuration file used as the basis
 # for the container DNS resolution configuration.
