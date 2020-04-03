@@ -5,6 +5,8 @@
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-minikube.svg)](https://github.com/alvistack/ansible-role-minikube/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.minikube-blue.svg)](https://galaxy.ansible.com/alvistack/minikube)
 
+**\[DEPRECATED\] No CRI-O support with `--vm-driver=none`, use kube\_master instead.**
+
 Ansible Role for minikube Installation.
 
 ## Requirements
