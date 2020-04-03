@@ -15,31 +15,23 @@
 # limitations under the License.
 
 _minikube_download:
+  v1.9.1:
+    url: "https://github.com/kubernetes/minikube/releases/download/v1.9.1/minikube-linux-amd64"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.9.1"
+    checksum: "sha1:dea55d11176e1c4b0b6a799c57e16e7da0800d41"
+  v1.9.0:
+    url: "https://github.com/kubernetes/minikube/releases/download/v1.9.0/minikube-linux-amd64"
+    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.9.0"
+    checksum: "sha1:830ebe3920c3ec4fd7ab4aeb7625831146eb3ceb"
   v1.8.2:
-    url: "https://storage.googleapis.com/minikube/releases/v1.8.2/minikube-linux-amd64"
+    url: "https://github.com/kubernetes/minikube/releases/download/v1.8.2/minikube-linux-amd64"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.8.2"
     checksum: "sha1:6f4924e5b2d5bc4695cc701606963c84f2d094a8"
   v1.8.1:
-    url: "https://storage.googleapis.com/minikube/releases/v1.8.1/minikube-linux-amd64"
+    url: "https://github.com/kubernetes/minikube/releases/download/v1.8.1/minikube-linux-amd64"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.8.1"
     checksum: "sha1:d8e0a348a4f73379804a90b20523c331bb0af470"
   v1.8.0:
-    url: "https://storage.googleapis.com/minikube/releases/v1.8.0/minikube-linux-amd64"
+    url: "https://github.com/kubernetes/minikube/releases/download/v1.8.0/minikube-linux-amd64"
     dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.8.0"
     checksum: "sha1:3399602e5957d417d96cc39d646c315dde0c9c54"
-  v1.7.3:
-    url: "https://storage.googleapis.com/minikube/releases/v1.7.3/minikube-linux-amd64"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.3"
-    checksum: "sha1:0af85ec59576c9bd55237eec83af5e830a096184"
-  v1.7.2:
-    url: "https://storage.googleapis.com/minikube/releases/v1.7.2/minikube-linux-amd64"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.2"
-    checksum: "sha1:c1e67ea056f3e0807a77546a965839d8438b6b95"
-  v1.7.1:
-    url: "https://storage.googleapis.com/minikube/releases/v1.7.1/minikube-linux-amd64"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.1"
-    checksum: "sha1:ddc5e7e51ae74b7d3b17192898190c47f0046513"
-  v1.7.0:
-    url: "https://storage.googleapis.com/minikube/releases/v1.7.0/minikube-linux-amd64"
-    dest: "{{ ansible_user_dir }}/.ansible/tmp/minikube-linux-amd64-v1.7.0"
-    checksum: "sha1:01025a824fc6187ad995232a65e06caa9397b70b"
